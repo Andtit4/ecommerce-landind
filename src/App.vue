@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="min-h-screen bg-black">
+    <NavBar />
+    <main>
+      <HeroSection />
+      <ProductCarousel :slides="products" />
+    </main>
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { onMounted  } from 'vue'
+import HeroSection from '@/components/home/HeroSection.vue'
+import ProductCarousel from '@/components/home/ProductCarousel/ProductCarousel.vue'
+import { useProductStore } from '@/stores/productStore'
+import NavBar from './components/navigation/NavBar.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+const productStore = useProductStore()
+const products = productStore.products
+
+onMounted(async () => {
+  await productStore.fetchProducts()
+})
+
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

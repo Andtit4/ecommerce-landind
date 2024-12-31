@@ -1,0 +1,193 @@
+/* assets/styles/main.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables CSS personnalisées */
+:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #ffffff;
+  --accent-color: #ff4d4d;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --transition-fast: 0.3s ease;
+  --transition-medium: 0.5s ease;
+  --transition-slow: 0.7s ease;
+}
+
+/* Styles de base */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-black text-white font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  /* Styles pour les scrollbars modernes */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-600 rounded-full hover:bg-gray-500 transition-colors;
+  }
+}
+
+/* Composants personnalisés */
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full
+           font-medium transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-white text-black hover:bg-gray-100
+           transform hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-white text-white hover:bg-white hover:text-black;
+  }
+
+  .nav-link {
+    @apply text-white/80 hover:text-white transition-colors duration-300
+           relative after:absolute after:bottom-0 after:left-0 
+           after:w-0 after:h-0.5 after:bg-white
+           after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+
+  .card {
+    @apply bg-gray-900 rounded-xl overflow-hidden shadow-lg
+           transform transition-all duration-500
+           hover:shadow-2xl hover:scale-[1.02];
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Classes d'utilité pour les animations */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Classes pour le carousel */
+.carousel-slide {
+  @apply absolute w-full h-full transition-transform duration-500 ease-out;
+}
+
+.carousel-fade-enter-active,
+.carousel-fade-leave-active {
+  @apply transition-opacity duration-500;
+}
+
+.carousel-fade-enter-from,
+.carousel-fade-leave-to {
+  @apply opacity-0;
+}
+
+/* Classes pour les images */
+.img-hover-zoom {
+  @apply overflow-hidden;
+}
+
+.img-hover-zoom img {
+  @apply transition-transform duration-700 ease-out
+         hover:scale-110 w-full h-full object-cover;
+}
+
+/* Classes pour le texte */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r 
+         from-white to-gray-400;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container-custom {
+    @apply px-4;
+  }
+
+  .btn {
+    @apply px-4 py-2 text-sm;
+  }
+}
+
+/* Classes d'espacement et de mise en page */
+.section-padding {
+  @apply py-16 md:py-24 lg:py-32;
+}
+
+.grid-auto-fit {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+/* Classes d'état */
+.is-loading {
+  @apply animate-pulse bg-gray-800;
+}
+
+.is-active {
+  @apply relative after:absolute after:bottom-0 after:left-0 
+         after:w-full after:h-0.5 after:bg-white;
+}
